@@ -1,0 +1,83 @@
+.Menu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(49, 49, 49, 0.97);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 128px;
+
+  z-index: 1;
+}
+
+.Menu * {
+  user-select: none;
+}
+
+.slide-in-animation {
+  animation: slide-in 0.5s ease-in-out forwards;
+}
+
+.slide-out-animation {
+  animation: slide-out 0.5s ease-in-out forwards;
+}
+
+.Menu > h1 {
+  font-size: 72px;
+  color: white;
+}
+
+.Menu--close-icon {
+  position: absolute;
+  right: 32px;
+  top: 32px;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Menu--close-icon:hover {
+  cursor: pointer;
+}
+
+.Menu--close-icon:before,
+.Menu--close-icon:after {
+  position: absolute;
+  content: " ";
+  height: 100%;
+  width: 2.5px;
+  background-color: white;
+}
+
+.Menu--close-icon:before {
+  transform: rotate(45deg);
+}
+
+.Menu--close-icon:after {
+  transform: rotate(-45deg);
+}
+
+@keyframes slide-in {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
+}

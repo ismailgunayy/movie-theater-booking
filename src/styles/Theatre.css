@@ -1,5 +1,4 @@
 .Theatre {
-  position: relative;
   perspective: 200px;
   display: flex;
   flex-direction: column;
