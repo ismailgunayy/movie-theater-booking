@@ -17,7 +17,9 @@ const Seat: FunctionComponent<
 
   return (
     <div
-      className={`Seat ${isFull ? "full" : isSelected ? "selected" : "vacant"}`}
+      className={`Seat ${
+        isFull ? "Seat--full" : isSelected ? "Seat--selected" : "Seat--vacant"
+      }`}
       onClick={handleSelectionChange}
       data-testid={name}
     >

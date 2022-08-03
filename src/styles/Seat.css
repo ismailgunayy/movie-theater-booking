@@ -13,19 +13,19 @@
   cursor: pointer;
 }
 
-.full {
+.Seat--full {
   cursor: not-allowed;
   background-color: var(--seat-full-bg);
   box-shadow: gray 0px 0px 4px;
   color: white;
 }
 
-.selected,
-.vacant:hover {
+.Seat--selected,
+.Seat--vacant:hover {
   background-color: var(--seat-selected-bg);
   color: white;
 }
 
-.selected:hover {
+.Seat--selected:hover {
   background-color: var(--seat-selected-hover-bg);
 }
