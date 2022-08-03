@@ -20,9 +20,9 @@ async function loadSeats(): Promise<ISeatLayout> {
   return data;
 }
 
-function saveSeats(seats: ISeatLayout) {
+async function saveSeats(seats: ISeatLayout) {
   const database = getDatabase();
-  set(ref(database, "seats/"), seats);
+  await set(ref(database, "seats/"), seats);
 }
 
 /**
