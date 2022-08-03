@@ -1,9 +1,9 @@
 :root {
-  --background-color: #191919;
+  --background-color: #c9c8c8;
   --screen-text: #444444;
   --seat-text: #17172d;
   --seat-full-bg: #272c2e;
-  --seat-selected-bg: #64bcda;
+  --seat-selected-bg: rgb(100, 188, 218);
   --seat-selected-hover-bg: #549fb8;
   --seat-confirm-button-bg: #484d4e;
   --seat-confirm-button-hover-bg: #393c3d;

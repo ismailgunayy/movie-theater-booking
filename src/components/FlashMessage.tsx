@@ -36,7 +36,8 @@ const FlashMessage: FunctionComponent<IProps> = ({
       style={{
         animation: `fadeOut ${fadeOut}s linear ${duration}s forwards`,
       }}
-      className={"FlashMessage"}
+      className="FlashMessage"
+      data-testid="flash-message"
     >
       {message}
     </div>

@@ -3,25 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.7.13",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
     "firebase": "^9.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.1.7-beta.1",
     "react-scripts": "5.0.1",
-    "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage .",
     "eject": "react-scripts eject",
     "format:check": "prettier --check 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
@@ -47,6 +40,13 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.4.1",
+    "@types/jest": "^28.1.6",
+    "@types/node": "^18.6.3",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
     "eslint": "^8.21.0",
@@ -56,6 +56,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.7.1"
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4"
   }
 }
