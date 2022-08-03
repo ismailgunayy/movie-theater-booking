@@ -1,26 +1,26 @@
 import { getDatabase, ref, child, get, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
-import ISeatLayout from "../types/ISeatLayout";
 import ISeat from "../types/ISeat";
 import { ROW_NUMBER, SEAT_NUMBER } from "../constants";
+import ISeatAPIResponse from "../types/ISeatAPIResponse";
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-async function loadSeats(): Promise<ISeatLayout> {
-  let data: ISeatLayout = [];
+async function loadSeats(): Promise<ISeatAPIResponse> {
+  let seats: ISeatAPIResponse = {};
 
   const snapshot = await get(child(ref(database), "seats/"));
   if (snapshot.exists()) {
-    data = await snapshot.val();
+    seats = await snapshot.val();
   } else {
     console.error("No data available");
   }
-  return data;
+  return seats;
 }
 
-async function saveSeats(seats: ISeatLayout) {
+async function saveSeats(seats: ISeatAPIResponse) {
   const database = getDatabase();
   await set(ref(database, "seats/"), seats);
 }
@@ -30,7 +30,7 @@ async function saveSeats(seats: ISeatLayout) {
  * Use with caution
  */
 function initializeDB() {
-  const seats = [];
+  const seatsData = [];
   for (let i = 1; i <= ROW_NUMBER; i++) {
     const row = [];
     const letter = String.fromCharCode(65 + i - 1); // Starting from 'A'
@@ -42,10 +42,10 @@ function initializeDB() {
       };
       row.push(newSeat);
     }
-    seats.push(row);
+    seatsData.push(row);
   }
-  saveSeats(seats);
-  // return seats;
+
+  saveSeats({ isFull: false, data: seatsData });
 }
 
 export { loadSeats, saveSeats, initializeDB };

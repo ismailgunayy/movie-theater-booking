@@ -2,9 +2,9 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { loadSeats, saveSeats } from "../api/seatsAPI";
 import Seat from "./Seat";
-import ISeatLayout from "../types/ISeatLayout";
 import FlashMessage from "./FlashMessage";
 import "../styles/Theatre.css";
+import ISeatAPIResponse from "../types/ISeatAPIResponse";
 
 interface IStatus {
   seats: "loading" | "loaded";
@@ -16,7 +16,7 @@ const Theatre: FunctionComponent = () => {
     seats: "loading",
     flashMessage: "hidden",
   });
-  const [seats, setSeats] = useState<ISeatLayout>([]);
+  const [seats, setSeats] = useState<ISeatAPIResponse>({});
 
   useEffect(() => {
     getSeats();
@@ -29,36 +29,44 @@ const Theatre: FunctionComponent = () => {
   }, []);
 
   function onSelectionChange(name: string) {
-    const tempSeats = seats;
-    for (let i = 0; i < tempSeats.length; i++) {
-      for (let j = 0; j < tempSeats[i].length; j++) {
-        const seat = tempSeats[i][j];
-        if (seat.name == name) {
-          seat.isSelected = !seat.isSelected;
+    console.log(seats);
+    const tempSeats = seats.data;
+    if (tempSeats != undefined) {
+      for (let i = 0; i < tempSeats.length; i++) {
+        for (let j = 0; j < tempSeats[i].length; j++) {
+          const seat = tempSeats[i][j];
+          if (seat.name == name) {
+            seat.isSelected = !seat.isSelected;
+          }
         }
       }
     }
-    setSeats(tempSeats);
+    setSeats({ isFull: seats.isFull, data: tempSeats });
   }
 
   async function handleConfirmSelections() {
     let isSelectedAtLeastOneSeat = false;
+    let isFull = true;
 
-    const tempSeats = seats;
-    for (let i = 0; i < tempSeats.length; i++) {
-      for (let j = 0; j < tempSeats[i].length; j++) {
-        const seat = tempSeats[i][j];
-        if (seat.isSelected) {
-          isSelectedAtLeastOneSeat = true;
-          seat.isSelected = false;
-          seat.isFull = true;
+    const tempSeats = seats.data;
+    if (tempSeats != undefined) {
+      for (let i = 0; i < tempSeats.length; i++) {
+        for (let j = 0; j < tempSeats[i].length; j++) {
+          const seat = tempSeats[i][j];
+          if (seat.isSelected) {
+            isSelectedAtLeastOneSeat = true;
+            seat.isSelected = false;
+            seat.isFull = true;
+          } else if (!(seat.isFull || seat.isSelected)) {
+            isFull = false;
+          }
         }
       }
     }
 
     if (isSelectedAtLeastOneSeat) {
       setStatus({ ...status, seats: "loading" });
-      await saveSeats(tempSeats);
+      await saveSeats({ isFull: isFull, data: tempSeats });
       setSeats(await loadSeats());
       setStatus({ ...status, seats: "loaded" });
     } else {
@@ -82,8 +90,8 @@ const Theatre: FunctionComponent = () => {
             color="white"
             ariaLabel="three-dots-loading"
           />
-        ) : (
-          seats.map((row, index) => {
+        ) : seats.data !== undefined ? (
+          seats.data.map((row, index) => {
             return (
               <div
                 key={index}
@@ -101,7 +109,7 @@ const Theatre: FunctionComponent = () => {
               </div>
             );
           })
-        )}
+        ) : null}
       </div>
       <hr />
       <button
