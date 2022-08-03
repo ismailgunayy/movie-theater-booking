@@ -6,12 +6,12 @@ import ISeat from "../types/ISeat";
 import { ROW_NUMBER, SEAT_NUMBER } from "../constants";
 
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const database = getDatabase(app);
 
 async function loadSeats(): Promise<ISeatLayout> {
   let data: ISeatLayout = [];
 
-  const snapshot = await get(child(ref(db), "seats/"));
+  const snapshot = await get(child(ref(database), "seats/"));
   if (snapshot.exists()) {
     data = await snapshot.val();
   } else {
@@ -21,11 +21,15 @@ async function loadSeats(): Promise<ISeatLayout> {
 }
 
 function saveSeats(seats: ISeatLayout) {
-  const db = getDatabase();
-  set(ref(db, "seats/"), seats);
+  const database = getDatabase();
+  set(ref(database, "seats/"), seats);
 }
 
-function createSeats() {
+/**
+ * Deletes everything in the db and initialize it over again.
+ * Use with caution
+ */
+function initializeDB() {
   const seats = [];
   for (let i = 1; i <= ROW_NUMBER; i++) {
     const row = [];
@@ -40,7 +44,8 @@ function createSeats() {
     }
     seats.push(row);
   }
-  return seats;
+  saveSeats(seats);
+  // return seats;
 }
 
-export { loadSeats, saveSeats, createSeats };
+export { loadSeats, saveSeats, initializeDB };
