@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
-import "../styles/Menu.css";
+import { Link } from "react-router-dom";
+import "../assets/styles/Menu.css";
 
 interface IProps {
   handleMenuRender: (flag: boolean) => void;
@@ -22,8 +23,12 @@ const Menu: FunctionComponent<IProps> = (props) => {
         data-testid="menu-close-icon"
         className="Menu--close-icon"
       ></div>
-      <h1>Movies</h1>
-      <h1>Theaters</h1>
+      <Link to="/movies">
+        <h1>Movies</h1>
+      </Link>
+      <Link to="/theaters">
+        <h1>Theaters</h1>
+      </Link>
     </div>
   );
 };

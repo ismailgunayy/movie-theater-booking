@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
-import "../styles/FlashMessage.css";
+import "../assets/styles/FlashMessage.css";
 
 interface IProps {
   /**

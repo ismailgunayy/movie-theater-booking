@@ -1,17 +1,27 @@
-.Theatre {
-  perspective: 200px;
+.Theater {
+  width: 100vw;
+  height: 100vh;
+  padding: 0 50px;
+
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  perspective: 200px;
   gap: 40px;
-  width: 80%;
+
+  background-color: rgb(49, 49, 49);
 }
 
-.Theatre * {
+.Theater * {
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.Theatre--screen {
+.Theater--screen {
   width: 100%;
+  max-width: 600px;
   height: 80px;
   background-color: white;
   display: flex;
@@ -20,10 +30,10 @@
   transform: rotateX(-25deg);
   box-shadow: white 0px 0px 13px;
   color: var(--screen-text);
-  margin-bottom: 30px;
+  margin: 0 auto 30px;
 }
 
-.Theatre--seats {
+.Theater--seats {
   min-height: 275px;
   margin-bottom: -30px;
   display: flex;
@@ -32,17 +42,24 @@
   align-items: center;
 }
 
-.Theatre--row {
+.Theater--row {
   display: flex;
   gap: 8px;
   margin-bottom: 10px;
 }
 
-.Theatre--confirm-button {
+.Theater--hr {
+  width: 100%;
+  height: 1px;
+  background-color: rgb(177, 177, 177);
+  max-width: 600px;
+}
+
+.Theater--confirm-button {
   width: 50%;
   height: 50px;
   font-size: 24px;
-  margin: auto;
+  margin: 0 auto;
   background-color: var(--seat-confirm-button-bg);
   color: white;
   border: none;
@@ -51,6 +68,6 @@
   cursor: pointer;
 }
 
-.Theatre--confirm-button:hover {
+.Theater--confirm-button:hover {
   background-color: var(--seat-confirm-button-hover-bg);
 }

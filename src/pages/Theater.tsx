@@ -1,22 +1,25 @@
 import React, { FunctionComponent, useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { loadSeats, saveSeats } from "../api/seatsAPI";
-import Seat from "./Seat";
-import FlashMessage from "./FlashMessage";
-import "../styles/Theatre.css";
+import Seat from "../components/Seat";
+import FlashMessage from "../components/FlashMessage";
 import ISeatAPIResponse from "../types/ISeatAPIResponse";
+import { useParams } from "react-router-dom";
+import "../assets/styles/Theater.css";
 
 interface IStatus {
   seats: "loading" | "loaded";
   flashMessage: "shown" | "hidden";
 }
 
-const Theatre: FunctionComponent = () => {
+const Theater: FunctionComponent = () => {
   const [status, setStatus] = useState<IStatus>({
     seats: "loading",
     flashMessage: "hidden",
   });
   const [seats, setSeats] = useState<ISeatAPIResponse>({});
+
+  const { id } = useParams();
 
   useEffect(() => {
     getSeats();
@@ -80,11 +83,11 @@ const Theatre: FunctionComponent = () => {
   }
 
   return (
-    <div className="Theatre">
-      <div className="Theatre--screen">
-        <h1>Screen</h1>
+    <div className="Theater">
+      <div className="Theater--screen">
+        <h1>Screen {id}</h1>
       </div>
-      <div className="Theatre--seats">
+      <div className="Theater--seats">
         {status.seats == "loading" ? (
           <TailSpin
             color="white"
@@ -95,7 +98,7 @@ const Theatre: FunctionComponent = () => {
             return (
               <div
                 key={index}
-                className="Theatre--row"
+                className="Theater--row"
               >
                 {row.map((seat, index) => {
                   return (
@@ -111,10 +114,10 @@ const Theatre: FunctionComponent = () => {
           })
         ) : null}
       </div>
-      <hr />
+      <div className="Theater--hr" />
       <button
         onClick={handleConfirmSelections}
-        className="Theatre--confirm-button"
+        className="Theater--confirm-button"
       >
         Confirm
       </button>
@@ -129,4 +132,4 @@ const Theatre: FunctionComponent = () => {
   );
 };
 
-export default Theatre;
+export default Theater;

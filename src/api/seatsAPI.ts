@@ -1,8 +1,8 @@
 import { getDatabase, ref, child, get, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
-import firebaseConfig from "./firebaseConfig";
+import firebaseConfig from "../config/firebaseConfig";
 import ISeat from "../types/ISeat";
-import { ROW_NUMBER, SEAT_NUMBER } from "../constants";
+import { ROW_NUMBER, SEAT_NUMBER } from "../services/constants";
 import ISeatAPIResponse from "../types/ISeatAPIResponse";
 
 const app = initializeApp(firebaseConfig);

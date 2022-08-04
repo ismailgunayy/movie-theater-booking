@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
 import ISeat from "../types/ISeat";
-import "../styles/Seat.css";
+import "../assets/styles/Seat.css";
 
 const Seat: FunctionComponent<
   ISeat & { liftSelectionChangeUp: (name: string) => void }

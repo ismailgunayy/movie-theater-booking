@@ -20,12 +20,18 @@
   color: white;
 }
 
-.Seat--selected,
-.Seat--vacant:hover {
+.Seat--selected {
   background-color: var(--seat-selected-bg);
   color: white;
 }
 
-.Seat--selected:hover {
-  background-color: var(--seat-selected-hover-bg);
+@media screen and (hover: hover) {
+  .Seat--vacant:hover {
+    background-color: var(--seat-selected-bg);
+    color: white;
+  }
+
+  .Seat--selected:hover {
+    background-color: var(--seat-selected-hover-bg);
+  }
 }

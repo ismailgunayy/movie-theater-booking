@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from "react";
-import logo from "../assets/film.png";
+import logo from "../assets/images/film.png";
 import Menu from "./Menu";
-import "../styles/Header.css";
+import "../assets/styles/Header.css";
 
 const Header: FunctionComponent = () => {
   const [isMenuShown, setIsMenuShown] = useState(false);
